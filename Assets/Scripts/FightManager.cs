@@ -6,114 +6,108 @@ using TMPro;
 
 public class FightManager : MonoBehaviour
 {
-    private int health_player = 300;
-    private int health_enemy = 300;
-
-    public TextMeshProUGUI health_player_text; // changing count health player
-    public TextMeshProUGUI health_enemy_text; // changing count health enemy
-
-    public TextMeshProUGUI[] player_perks;
-    public TextMeshProUGUI[] enemy_perks;
-
-    public TextMeshProUGUI win_perk;
+    private int healthPlayerOne = 300;
+    private int healthPlayerTwo = 300;
+    public TextMeshProUGUI healthPlayerOneText; // changing count health player one
+    public TextMeshProUGUI healthPlayerTwoText; // changing count health player two
+    public TextMeshProUGUI[] playerOneSkills;
+    public TextMeshProUGUI[] playerTwoSkils;
+    public TextMeshProUGUI winSkill;
     public TextMeshProUGUI winner;
-
-    private List<string> perks = new List<string>() {"fire", "water", "ground", "wind", "magic", "ice"};
-
-    private GameObject player;
-    private GameObject enemy;
-
+    private List<string> skills = new List<string>() {"fire", "water", "ground", "wind", "magic", "ice"};
+    private GameObject playerOne;
+    private GameObject playerTwo;
     public GameObject winMenu;
 
     // Start is called before the first frame update
     void Start()
     {
         winMenu.SetActive(false);
-        // give perks to characters
+        // give skill to characters
         for(int i = 0; i < 3; i++)
         {
-            int random_player = Random.Range(0,perks.Count);
-            player_perks[i].text = perks[random_player];
-            perks.Remove(perks[random_player]);
+            int randomPlayer = Random.Range(0,skills.Count);
+            playerTwoSkils[i].text = skills[randomPlayer];
+            skills.Remove(skills[randomPlayer]);
 
-            int random_enemy = Random.Range(0,perks.Count);
-            enemy_perks[i].text = perks[random_enemy];
-            perks.Remove(perks[random_enemy]);
+            int random_enemy = Random.Range(0,skills.Count);
+            playerOneSkills[i].text = skills[random_enemy];
+            skills.Remove(skills[random_enemy]);
             
         }
         // show in UI
-        health_player_text.text = health_player.ToString();
-        health_enemy_text.text = health_enemy.ToString();
+        healthPlayerTwoText.text = healthPlayerTwo.ToString();
+        healthPlayerOneText.text = healthPlayerOne.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        player = GameObject.Find("player");
-        enemy = GameObject.Find("enemy");
+        playerOne = GameObject.Find("playerOne");
+        playerTwo = GameObject.Find("playerTwo");
 
         // which button is pressed, that player hits and start animation
-
         if(Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if(health_enemy > 0 && health_player > 0)
+            if(healthPlayerOne > 0 && healthPlayerTwo > 0)
             {
-                player.GetComponent<AnimationControl>().Scream_Anim();
-                Invoke("EnemyGetHit", 0.7f); 
+                playerTwo.GetComponent<AnimationControl>().ScreamAnimation();
+                Invoke("PlayerOneGetHit", 0.7f); 
             }   
         }
         if(Input.GetKeyDown(KeyCode.UpArrow))
         {
-            if(health_enemy > 0 && health_player > 0)
+            if(healthPlayerOne > 0 && healthPlayerTwo > 0)
             {
-                player.GetComponent<AnimationControl>().Attack_Anim();
-                Invoke("EnemyGetHit", 0.7f);
+                playerTwo.GetComponent<AnimationControl>().AttackAnimation();
+                Invoke("PlayerOneGetHit", 0.7f);
             }    
         }
-        if(Input.GetKeyDown(KeyCode.A))
+        if(Input.GetKeyDown(KeyCode.D))
         { 
-            if(health_player > 0 && health_enemy > 0){
-               enemy.GetComponent<AnimationControl>().Scream_Anim();
-                Invoke("PlayerGetHit", 0.7f); 
+            if(healthPlayerTwo > 0 && healthPlayerOne > 0){
+               playerOne.GetComponent<AnimationControl>().ScreamAnimation();
+                Invoke("PlayerTwoGetHit", 0.7f); 
             }
         }
-        if(Input.GetKeyDown(KeyCode.Z))
+        if(Input.GetKeyDown(KeyCode.W))
         { 
-            if(health_player > 0 && health_enemy > 0){
-               enemy.GetComponent<AnimationControl>().Attack_Anim();
-                Invoke("PlayerGetHit", 0.7f); 
+            if(healthPlayerTwo > 0 && healthPlayerOne > 0){
+               playerOne.GetComponent<AnimationControl>().AttackAnimation();
+                Invoke("PlayerTwoGetHit", 0.7f); 
             }
         }
     }
 
-    public void PlayerGetHit()
-    {
-        health_player -= Random.Range(5,50);
-        if(health_player <= 0)
-        {
-            health_player = 0;
-            player.GetComponent<AnimationControl>().Die_Anim();
-            // get one random perk from the loser
-            win_perk.text = player_perks[Random.Range(0,3)].text;
-            winner.text = "Enemy";
-            winMenu.SetActive(true);
-        }
-        else player.GetComponent<AnimationControl>().GetHit_Anim();
-        health_player_text.text = health_player.ToString();
-    }
-    public void EnemyGetHit()
+    public void PlayerOneGetHit()
     { 
-        health_enemy -= Random.Range(5,50);
-        if(health_enemy <= 0)
+        healthPlayerOne -= Random.Range(5,50);
+        if(healthPlayerOne <= 0)
         {
-            health_enemy = 0;
-            enemy.GetComponent<AnimationControl>().Die_Anim();
-            // get one random perk from the loser
-            win_perk.text = enemy_perks[Random.Range(0,3)].text;
-            winner.text = "Player";
+            healthPlayerOne = 0;
+            playerOne.GetComponent<AnimationControl>().DieAnimation();
+            // get one random skill from the loser
+            winSkill.text = playerOneSkills[Random.Range(0,3)].text;
+            winner.text = "Player Two";
             winMenu.SetActive(true);
         }
-        else enemy.GetComponent<AnimationControl>().GetHit_Anim();
-        health_enemy_text.text = health_enemy.ToString();
+        else playerOne.GetComponent<AnimationControl>().GetHitAnimation();
+        healthPlayerOneText.text = healthPlayerOne.ToString();
+    }
+
+    public void PlayerTwoGetHit()
+    {
+        healthPlayerTwo -= Random.Range(5,50);
+        if(healthPlayerTwo <= 0)
+        {
+            healthPlayerTwo = 0;
+            playerTwo.GetComponent<AnimationControl>().DieAnimation();
+            // get one random skill from the loser
+            winSkill.text = playerTwoSkils[Random.Range(0,3)].text;
+            winner.text = "Player One";
+            winMenu.SetActive(true);
+        }
+        else playerTwo.GetComponent<AnimationControl>().GetHitAnimation();
+        healthPlayerTwoText.text = healthPlayerTwo.ToString();
     }
 }

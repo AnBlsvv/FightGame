@@ -6,38 +6,31 @@ using UnityEngine.UI;
 // Animation Control Script
 public class AnimationControl : MonoBehaviour
 {
-    private Animator player_animator;
+    private Animator playerAnimator;
 
     // Start is called before the first frame update
     void Start()
     {
-        player_animator = GetComponent<Animator>();
+        playerAnimator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ScreamAnimation()
     {
-
+        playerAnimator.Play("Scream");
     }
 
-    public void Scream_Anim()
+    public void AttackAnimation()
     {
-        player_animator.Play("Scream");
+        playerAnimator.Play("Basic Attack");
     }
 
-    public void Attack_Anim()
+    public void GetHitAnimation()
     {
-        //Fireball Shoot
-        player_animator.Play("Basic Attack");
+        playerAnimator.Play("Get Hit");
     }
 
-    public void GetHit_Anim()
+    public void DieAnimation()
     {
-        player_animator.Play("Get Hit");
-    }
-
-    public void Die_Anim()
-    {
-        player_animator.Play("Die");
+        playerAnimator.Play("Die");
     }
 }
