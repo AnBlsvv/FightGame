@@ -1,0 +1,1 @@
+The test task was: create an arena for creatures. There should only be two creatures and they have a set of random skills (skills don’t animate, they’re as an example). When killing a creature, the winning player gains any skill of the losing player.
