@@ -6321,15 +6321,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'This is fighting game for two players.
+  m_text: 'This is a Fighting Game for two players.
 
-    One player uses W,D buttons
-    and the other uses Left Arrow, Up Arrow.
+    Player 1: Use W for Attack
+    1 and D for Attack 2.
 
-    You never know how much health
-    each hit takes.
+    Player 2: Use Up Arrow for Attack 1 and Left Arrow
+    for Attack 2
 
-    All you need is LUCK =)'
+    You never know how many damage will take the next attack.
+
+    All
+    you need is LUCK =)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6356,8 +6359,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
